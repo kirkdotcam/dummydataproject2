@@ -6,16 +6,11 @@ import pandas
 import os
 from libs import scraper
 
-##detect your environment, and conditionally load config file
-if not os.environ.get('DYNO'):
-    import config
-    print(config.name)
-
 ##detect your environment, and conditionally load database url
 if os.environ.get("JAWSDB_URL"):
     dburl = os.environ["JAWSDB_URL"]
 else:
-    dburl = config.dburl
+    from config import dburl
 
 # create an engine for your database connection
 engine = sqlalchemy.create_engine(dburl)
